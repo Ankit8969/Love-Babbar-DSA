@@ -1,0 +1,53 @@
+/* FOR SOLVING THIS PROBEM YOU MUST HAVE TO REMEBER *****"MERGE SORT"*****   */
+
+long long ans = 0;
+    void merge(long long arr[], long long s, long long mid, long long e)
+    {
+        long long n = mid - s + 1;
+        long long m = e - mid;
+        long long a[n], b[m];
+        for (long long i = 0; i < n; i++)
+            a[i] = arr[s + i];
+        for (long long i = 0; i < m; i++)
+            b[i] = arr[i + mid + 1];
+    
+        long long i = 0, j = 0, k = s;
+        while (i < n && j < m)
+        {
+            if (a[i] > b[j])
+            {
+                ans += n - i;
+                arr[k++] = b[j];
+                j++;
+            }
+            else
+            {
+                arr[k++] = a[i];
+                i++;
+            }
+        }
+        while (i < n)
+            arr[k++] = a[i++];
+        while (j < m)
+            arr[k++] = b[j++];
+    }
+    
+    void merge_sort(long long arr[], long long s, long long e)
+    {
+        if (s >= e)
+            return;
+    
+        long long mid = (s + e) / 2;
+        merge_sort(arr, s, mid);
+        merge_sort(arr, mid + 1, e);
+    
+        merge(arr, s, mid, e);
+    }
+
+    
+    long long inversionCount(long long arr[], long long N)
+    {
+        ans = 0;
+        merge_sort(arr, 0, N-1);
+        return ans;
+    }
