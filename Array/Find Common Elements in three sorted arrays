@@ -1,0 +1,38 @@
+/* For solving this problem I used 3 varibla i, j, k */
+
+vector <int> commonElements (int A[], int B[], int C[], int n1, int n2, int n3)
+{
+    int i=0,j=0, k=0;
+    vector<int> v;
+
+    while(i<n1 && j<n2 && k<n3)
+    {
+        while(A[i] != B[j])
+        {
+            while(i<n1 && A[i]<B[j])
+                i++;
+            while(j<n2 && A[i]>B[j])
+            j ++ ;
+            if (i == n1 || j == n2)
+                return v;
+        }
+        while(k<n3 && B[j] > C[k])
+        {
+            k ++ ;
+        }
+        if (k == n3)
+            return v;
+
+        if (A[i] == B[j] && B[j] == C[k])
+        {
+            if (v.size()>0 && v[v.size()-1] == A[i])
+            {
+            }
+            else
+            v.push_back(A[i]);
+
+        }
+        i ++ ;
+    }
+    return v;
+}
