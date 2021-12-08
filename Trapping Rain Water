@@ -1,0 +1,35 @@
+
+/* Most Efficient Approach */
+Time - O(n);
+Space - O(1)
+
+
+int trap(vector<int>& arr) {
+        int i=0, j = arr.size()-1;
+        int left = 0, right = 0;
+        int ans = 0;
+        while(i<j)
+        {
+            if (arr[i] <= arr[j])
+            {
+                if (arr[i]<=left)
+                {
+                    ans += left-arr[i];
+                    i++;
+                }
+                else
+                    left = arr[i];
+            }
+            else
+            {
+                if (arr[j]<=right)
+                {
+                    ans += right-arr[j];
+                    j--;
+                }
+                else
+                    right = arr[j];
+            }
+        }
+        return ans;
+    }
