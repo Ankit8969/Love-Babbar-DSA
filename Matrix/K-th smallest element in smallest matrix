@@ -1,0 +1,46 @@
+/*   
+
+Prerequisite - Binary Search
+
+*/
+
+
+
+
+int give_the_small(vector<int> mat,int j, int target)
+{
+    int i=0;
+    while(i<=j)
+    {
+        int mid = (i+j)/2;
+        if (mat[mid] <= target)
+        i = mid+1;
+        else
+        j = mid-1;
+    }
+    return i;
+}
+
+class Solution {
+public:
+    int kthSmallest(vector<vector<int>>& mat, int k) {
+        int n = mat.size();
+        int low = mat[0][0];
+        int high = mat[n-1][n-1];
+
+        while(low<=high)
+        {
+            int mid = (low+high)/2;
+            int t = 0;
+            for (int i=0;i<n;i++)
+            {
+                t += give_the_small(mat[i], n-1, mid);
+            }
+            if (t<k)
+            low = mid+1;
+            else
+            high = mid-1;
+        }
+        return low;
+    }
+};
